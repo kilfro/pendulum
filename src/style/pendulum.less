@@ -1,0 +1,23 @@
+@ball-diameter: 70px;
+
+.pendulum {
+  margin: 0 auto;
+}
+
+.thread {
+  position: relative;
+  height: 500px;
+  border: 1px solid steelblue;
+  transform-origin: top;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -@ball-diameter;
+    left: @ball-diameter * -0.5;
+    width: @ball-diameter;
+    height: @ball-diameter;
+    background-color: indigo;
+    border-radius: 50%;
+  }
+}
