@@ -1,0 +1,19 @@
+{
+  "name": "pendulum",
+  "version": "0.0.1",
+  "author": "Kirill Frolov <frolov.cyrill@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kilfro/pendulum.git"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
