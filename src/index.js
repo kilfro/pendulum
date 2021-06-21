@@ -2,7 +2,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import App from './App'
 import {createStore} from 'redux'
-import {reducer} from './store/actionCreators'
+import {reducer} from './store/reducer'
 import {Provider} from 'react-redux'
 
 const appStore = createStore(reducer)

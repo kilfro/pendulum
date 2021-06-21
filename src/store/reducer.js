@@ -3,7 +3,7 @@ import {SET_GRAVITY, SET_INITIAL_IMPULSE, SET_THREAD_LENGTH, SET_WEIGHT} from '.
 const defaultState = {
     length: 300,
     weight: 100,
-    gravity: 9.81,
+    gravity: 9.8,
     impulse: 100,
 }
 
