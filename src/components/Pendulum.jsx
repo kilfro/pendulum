@@ -1,10 +1,18 @@
 import React from 'react'
 import '@style/pendulum.less'
+import {connect} from 'react-redux'
 
-const Pendulum = () => (
-    <div className="pendulum">
-        <div className="thread"/>
-    </div>
-)
+const Pendulum = ({length}) => {
+    const pendulumStyle = {
+        height: `${length}px`,
+    }
 
-export default Pendulum
+    return (
+        <div className="pendulum">
+            <div className="thread" style={pendulumStyle}/>
+        </div>
+    )
+}
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps)(Pendulum)

@@ -1,7 +1,7 @@
 import {SET_GRAVITY, SET_INITIAL_IMPULSE, SET_THREAD_LENGTH, SET_WEIGHT} from './actionTypes'
 
 const defaultState = {
-    length: 300,
+    length: 700,
     weight: 100,
     gravity: 9.8,
     impulse: 100,
