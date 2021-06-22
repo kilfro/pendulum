@@ -4,30 +4,60 @@ import {setGravity, setInitialImpulse, setThreadLength, setWeight} from '../stor
 import {connect} from 'react-redux'
 
 const Control = ({gravity, length, weight, impulse, setThreadLength, setWeight, setGravity, setInitialImpulse}) => {
-    const threadLengthHolder = event => setThreadLength(event.target.value)
-    const weightHolder = event => setWeight(event.target.value)
-    const gravityHolder = event => setGravity(event.target.value)
-    const impulseHolder = event => setInitialImpulse(event.target.value)
+    const settersMap = {
+        length: {
+            description: 'Длина подвеса',
+            min: 10,
+            max: 30,
+            step: 0.1,
+            value: length,
+            set: setThreadLength,
+        },
+        weight: {
+            description: 'Вес груза',
+            min: 20,
+            max: 100,
+            value: weight,
+            set: setWeight,
+        },
+        gravity: {
+            description: 'Сила притяжения',
+            min: 1,
+            max: 100,
+            step: 0.1,
+            value: gravity,
+            set: setGravity,
+        },
+        impulse: {
+            description: 'Начальный импульс',
+            min: 1,
+            max: 60,
+            value: impulse,
+            set: setInitialImpulse,
+        },
+    }
 
     return (
         <div className="control">
-            <div className="control-group">
-                <label htmlFor="thread-length">Длина подвеса: {length}</label>
-                <input type="range" name="thread-length" min="100" max="1000" value={length}
-                       onChange={threadLengthHolder}/>
-            </div>
-            <div className="control-group">
-                <label htmlFor="ball-weight">Вес груза: {weight}</label>
-                <input type="range" name="ball-weight" min="50" max="500" value={weight} onChange={weightHolder}/>
-            </div>
-            <div className="control-group">
-                <label htmlFor="gravity">Сила притяжения: {gravity}</label>
-                <input type="range" name="gravity" min="1" max="100" step="0.1" value={gravity} onChange={gravityHolder}/>
-            </div>
-            <div className="control-group">
-                <label htmlFor="momentum">Начальный импульс: {impulse}</label>
-                <input type="range" name="momentum" min="1" max="1000" value={impulse} onChange={impulseHolder}/>
-            </div>
+            {
+                Object.entries(settersMap).map(([key, option]) => {
+                        const {set, description, ...rest} = option
+                        const inputProps = {
+                            ...rest,
+                            name: key,
+                            onChange: event => {
+                                set(event.target.value)
+                            }
+                        }
+
+                        return (
+                            <div className="control-group" key={key}>
+                                <label htmlFor={key}>{description}: {option.value}</label>
+                                <input type="range" {...inputProps}/>
+                            </div>)
+                    }
+                )
+            }
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import {SET_GRAVITY, SET_INITIAL_IMPULSE, SET_THREAD_LENGTH, SET_WEIGHT} from './actionTypes'
 
 const defaultState = {
-    length: 700,
-    weight: 100,
+    length: 10,
+    weight: 50,
     gravity: 9.8,
-    impulse: 100,
+    impulse: 45,
 }
 
 const theReducer = {
