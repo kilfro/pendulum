@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import '@style/pendulum.less'
 import {connect} from 'react-redux'
 
-const Pendulum = ({length, impulse, gravity, weight}) => {
+export const Pendulum = ({length, impulse, gravity, weight}) => {
     const [time, setTime] = useState(0)
     const [angel, setAngel] = useState(0)
     const timeout = 5

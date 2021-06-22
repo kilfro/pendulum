@@ -3,7 +3,7 @@ import '@style/control.less'
 import {setGravity, setInitialImpulse, setThreadLength, setWeight} from '../store/actionCreators'
 import {connect} from 'react-redux'
 
-const Control = ({gravity, length, weight, impulse, setThreadLength, setWeight, setGravity, setInitialImpulse}) => {
+export const Control = ({gravity, length, weight, impulse, setThreadLength, setWeight, setGravity, setInitialImpulse}) => {
     const settersMap = {
         length: {
             description: 'Длина подвеса',
