@@ -1,17 +1,21 @@
 import React from 'react'
 import '@style/control.less'
-import {setGravity, setInitialImpulse, setThreadLength, setWeight} from '../store/actionCreators'
-import {connect} from 'react-redux'
+import {IControlMap} from '../types/ContorolTypes'
+import {useTypedSelector} from '../hooks/useTypedSelector'
+import {useActions} from '../hooks/useActions'
 
-export const Control = ({gravity, length, weight, impulse, setThreadLength, setWeight, setGravity, setInitialImpulse}) => {
-    const settersMap = {
+export const Control: React.FC = () => {
+    const {length, impulse, gravity, weight} = useTypedSelector(state => state)
+    const {setLength, setGravity, setWeight, setImpulse} = useActions()
+
+    const settersMap: IControlMap = {
         length: {
             description: 'Длина подвеса',
             min: 10,
             max: 30,
             step: 0.1,
             value: length,
-            set: setThreadLength,
+            set: setLength,
         },
         weight: {
             description: 'Вес груза',
@@ -33,7 +37,7 @@ export const Control = ({gravity, length, weight, impulse, setThreadLength, setW
             min: 1,
             max: 60,
             value: impulse,
-            set: setInitialImpulse,
+            set: setImpulse,
         },
     }
 
@@ -45,9 +49,9 @@ export const Control = ({gravity, length, weight, impulse, setThreadLength, setW
                         const inputProps = {
                             ...rest,
                             name: key,
-                            onChange: event => {
+                            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
                                 set(event.target.value)
-                            }
+                            },
                         }
 
                         return (
@@ -55,20 +59,9 @@ export const Control = ({gravity, length, weight, impulse, setThreadLength, setW
                                 <label htmlFor={key}>{description}: {option.value}</label>
                                 <input type="range" {...inputProps}/>
                             </div>)
-                    }
+                    },
                 )
             }
         </div>
     )
 }
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = {
-    setThreadLength,
-    setWeight,
-    setGravity,
-    setInitialImpulse,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Control)
