@@ -10,10 +10,7 @@ module.exports = {
         port: 3000,
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.tsx', '.ts'],
-        alias: {
-            '@style': path.resolve(__dirname, 'src', 'style'),
-        }
+        extensions: ['.js', '.tsx', '.ts'],
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -23,18 +20,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
-            },
-            {
                 test: /\.(ts|tsx)?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
-            },
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
             },
         ],
     },

@@ -1,8 +1,37 @@
 import React from 'react'
-import '@style/control.less'
 import {IControlMap} from '../types/ContorolTypes'
 import {useTypedSelector} from '../hooks/useTypedSelector'
 import {useActions} from '../hooks/useActions'
+import styled from 'styled-components'
+
+const ControlSection = styled.div`
+  background-color: rgba(95, 135, 120, 0.6);
+  box-sizing: border-box;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ControlGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  width: 500px;
+  margin-bottom: 20px;
+
+  label {
+    text-transform: uppercase;
+    color: white;
+  }
+
+  input {
+    width: 300px;
+  }
+`
 
 export const Control: React.FC = () => {
     const {length, impulse, gravity, weight} = useTypedSelector(state => state)
@@ -42,7 +71,7 @@ export const Control: React.FC = () => {
     }
 
     return (
-        <div className="control">
+        <ControlSection>
             {
                 Object.entries(settersMap).map(([key, option]) => {
                         const {set, description, ...rest} = option
@@ -55,13 +84,13 @@ export const Control: React.FC = () => {
                         }
 
                         return (
-                            <div className="control-group" key={key}>
+                            <ControlGroup key={key}>
                                 <label htmlFor={key}>{description}: {option.value}</label>
                                 <input type="range" {...inputProps}/>
-                            </div>)
+                            </ControlGroup>)
                     },
                 )
             }
-        </div>
+        </ControlSection>
     )
 }

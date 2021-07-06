@@ -1,6 +1,29 @@
 import React, {useEffect, useState} from 'react'
-import '@style/pendulum.less'
 import {useTypedSelector} from '../hooks/useTypedSelector'
+import styled from 'styled-components'
+import {BallProps, ThreadProps} from '../types/PendulumTypes'
+
+const PendulumSection = styled.div`
+  margin: 0 auto;
+`
+
+const Thread = styled.div<ThreadProps>`
+  position: relative;
+  border: 1px solid steelblue;
+  transform-origin: top;
+  height: ${props => props.length + 'cm'};
+  transform: ${props => 'rotate(' + props.angel + 'deg)'};
+`
+
+const Ball = styled.div<BallProps>`
+  position: absolute;
+  background-color: rgba(75, 0, 130, 0.96);
+  border-radius: 50%;
+  bottom: ${props => -props.weight + 'px'};
+  left: ${props => +props.weight * -0.5 + 'px'};
+  width: ${props => props.weight + 'px'};
+  height: ${props => props.weight + 'px'};
+`
 
 export const Pendulum: React.FC = () => {
     const timeout = 5
@@ -22,23 +45,11 @@ export const Pendulum: React.FC = () => {
         return () => clearInterval(intervalId)
     }, [time])
 
-    const pendulumStyle = {
-        height: `${length}cm`,
-        transform: `rotate(${angel}deg)`,
-    }
-
-    const ballStyle = {
-        bottom: -weight,
-        left: +weight * -0.5,
-        width: `${weight}px`,
-        height: `${weight}px`,
-    }
-
     return (
-        <div className="pendulum">
-            <div className="thread" style={pendulumStyle}>
-                <div className="ball" style={ballStyle}/>
-            </div>
-        </div>
+        <PendulumSection>
+            <Thread length={length} angel={angel}>
+                <Ball weight={weight}/>
+            </Thread>
+        </PendulumSection>
     )
 }
