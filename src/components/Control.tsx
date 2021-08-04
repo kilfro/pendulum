@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {IControlMap} from '../types/ContorolTypes'
-import {useTypedSelector} from '../hooks/useTypedSelector'
-import {useActions} from '../hooks/useActions'
 import styled from 'styled-components'
+import {AppContext} from '../store'
+import {setGravity, setImpulse, setLength, setWeight} from '../store/actionCreators'
 
 const ControlSection = styled.div`
   background-color: rgba(95, 135, 120, 0.6);
@@ -34,8 +34,7 @@ const ControlGroup = styled.div`
 `
 
 export const Control: React.FC = () => {
-    const {length, impulse, gravity, weight} = useTypedSelector(state => state)
-    const {setLength, setGravity, setWeight, setImpulse} = useActions()
+    const {state: {length, impulse, gravity, weight}, dispatch} = useContext(AppContext)
 
     const settersMap: IControlMap = {
         length: {
@@ -44,14 +43,14 @@ export const Control: React.FC = () => {
             max: 30,
             step: 0.1,
             value: length,
-            set: setLength,
+            set: (val) => dispatch(setLength(val)),
         },
         weight: {
             description: 'Вес груза',
             min: 20,
             max: 100,
             value: weight,
-            set: setWeight,
+            set: (val) => dispatch(setWeight(val)),
         },
         gravity: {
             description: 'Сила притяжения',
@@ -59,14 +58,14 @@ export const Control: React.FC = () => {
             max: 100,
             step: 0.1,
             value: gravity,
-            set: setGravity,
+            set: (val) => dispatch(setGravity(val)),
         },
         impulse: {
             description: 'Начальный импульс',
             min: 1,
             max: 60,
             value: impulse,
-            set: setImpulse,
+            set: (val) => dispatch(setImpulse(val)),
         },
     }
 

@@ -1,13 +1,6 @@
 import {PendulumAction, PendulumActionTypes, PendulumState} from '../types/StoreTypes'
 
-const defaultState: PendulumState = {
-    length: '10',
-    weight: '50',
-    gravity: '9.8',
-    impulse: '45',
-}
-
-export const reducer = (state = defaultState, {type, payload}: PendulumAction): PendulumState => {
+export const reducer = (state: PendulumState, {type, payload}: PendulumAction): PendulumState => {
     switch (type) {
         case PendulumActionTypes.SET_WEIGHT:
             return {...state, weight: payload}

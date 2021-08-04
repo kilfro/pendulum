@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {useTypedSelector} from '../hooks/useTypedSelector'
+import React, {useContext, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {BallProps, ThreadProps} from '../types/PendulumTypes'
+import {AppContext} from '../store'
 
 const PendulumSection = styled.div`
   margin: 0 auto;
@@ -30,7 +30,7 @@ export const Pendulum: React.FC = () => {
 
     const [time, setTime] = useState<number>(0)
     const [angel, setAngel] = useState<number>(0)
-    const {weight, impulse, gravity, length} = useTypedSelector(state => state)
+    const {state: {weight, impulse, gravity, length}} = useContext(AppContext)
 
     const calculateCurrentAngel = (timeInSeconds: number): number => {
         return +impulse * Math.sin(Math.sqrt(+gravity / (+length / 100)) * timeInSeconds)
